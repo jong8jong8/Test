@@ -1,14 +1,35 @@
-let angle = 0;
+let x = 0;
+let y = 0
+let x_speed = 3;
+let y_speed = 3;
 
 function setup() {
-    createCanvas(400, 400);
-    background(220);
+    createCanvas(600, 400);
 }
 
 function draw() {
-    let x = map(cos(angle), -1, 1, 0, width);
-    let y = map(sin(angle), -1, 1, 0, height);
-    line(200, 200, x, y);
-    ellipse(x, y, 20, 20);
-    angle += 0.02;
+    background(0);
+        
+    stroke(255);
+    strokeWeight(4);
+    noFill();
+    circle(x, y, 100); 
+
+    if (x > width - 50) {
+        x_speed = -3;
+    } else if (x < 50 ) {
+        x_speed = 3;
+    }
+    if (y > height - 50) {
+        y_speed = -3
+    } else if (y < 50) {
+        y_speed = 3
+    }
+    x = x + x_speed;
+    y = y + y_speed;
 }
+
+
+
+
+
