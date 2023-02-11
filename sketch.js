@@ -1,12 +1,20 @@
-let song;
+let speech;
 
 function preload() {
-    song = loadSound("The Columbians - Just Like A Rainbow.mp3");
+  // speech = new p5.Speech();
 }
 
 function setup() {
-    console.log("start");
-    song.play();
-    
+  noCanvas();
+  speech = new p5.Speech();
 }
- 
+
+function keyPressed() {
+  if (key == 'e') {
+    speech.speak('Hello world'); // English
+  } else if (key == 'k') {
+    speech.speak('안녕'); // 한국어
+  } else if (key == 'n') {
+    speech.speak('18'); // 수
+  }
+}
