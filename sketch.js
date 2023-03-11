@@ -1,12 +1,12 @@
-
-
 let mobilenet;
 let bird;
 let speech;
+let button;
+let classifyResult;
 
 
 function preload() {
-    mobilenet = ml5.imageClassifier('MobileNet', modelReady);
+  mobilenet = ml5.imageClassifier('MobileNet', modelReady);
 }
 
 function setup() {
@@ -15,12 +15,14 @@ function setup() {
     bird.hide();
     background(0);
     speech = new p5.Speech();
-    
+    button = createButton('click to calssify');
+    button.position(700,500);
+    button.mousePressed(modelReady);    
 }
 
 function modelReady() {
     console.log('Model is ready!');
-    mobilenet.classify(bird, gotResults);
+    mobilenet.classify(bird, gotResults);    
 }
 
 function gotResults(error, results) { 
@@ -30,8 +32,13 @@ function gotResults(error, results) {
         console.log(results);
         let label = results[0].label;
         let confidence = results[0].confidence;
-        createP(label);
-        createP(confidence);
+        let p1 = createP(label);
+        let p2 =createP(confidence);
+        p1.style('font-size','25px');
+        p1.position(10,550);
+        p2.style('font-size','25px');
+        p2.position (10,600); 
+        speech.setLang('en-US');
         speech.speak(`This would be ${label}`);
     }
 }
@@ -40,4 +47,3 @@ function imageReady() {
     console.log('image is ready!');
     image(bird, 0, 0, width, height); 
 }
- 
